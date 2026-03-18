@@ -8,24 +8,22 @@
 
 
 {% block content %}
-<div class="content">
-    <p class="description">
-        <span>Whisper</span> est un transcripteur de fichier audio.
+<div class="title_container">
+    <h2 class="title">
+        Transcription audio <br> en texte📝
+    </h2>
+</div>
+
+<div class="description_container">
+    <p>
+        Qu'est-ce que <span>Monk</span> ?
     </p>
-    <p class="description">
-        Ce site a pour but de recevoir des <b>fichiers audios</b> et de les transcrire dans un fichier <b>.txt</b> 
-        grâce à l'IA, et ceci localement sur notre serveur.
-        Une fois la transcription réalisée, le fichier audio reçu par le serveur sera <b>supprimé</b>.
+    <p>
+        Monk, comme vous devriez le deviner, fais référence aux moines dont le métier étaient de copier des
+        manuscrits à la main.
     </p>
-    <p class="description">
-        Pour pouvoir utiliser ce service, il faudra vous <b>connecter</b> à votre compte, et vous n'avez droit qu'à
-        une transcription par session, impossible d'ouvrir plusieurs onglets/fenêtres et de tenter plusieurs requêtes
-        à la fois, ceci pour ne pas surcharger le serveur.
+    <p>
+        Mais ici, nous faisons appel à l'IA, plus particulièrement un modèle Open Source, <i>Whisper</i>
     </p>
-    <p class="description">
-        Si une transcription est en cours dans votre navigateur, ne le fermez surtout pas. Le serveur n'enregistre
-        aucune transcription, il ne joue que le rôle de "passeur".
-    </p>
-    <a href="{{ url_for('read_login_page') }}" class="login_button">Aller sur la page de connexion</a>
 </div>
 {% endblock %}
