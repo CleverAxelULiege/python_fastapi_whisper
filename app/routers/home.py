@@ -14,7 +14,6 @@ router = APIRouter(
 
 @router.get("/", response_class=HTMLResponse)
 async def read_home_page(request:Request):
-    print(request.state.user)
     return TEMPLATE_DIRECTORY.TemplateResponse(
         request=request, name="home/index.html", context={"message": "hello world"}
     )

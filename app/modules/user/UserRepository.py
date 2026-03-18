@@ -1,6 +1,6 @@
 from psycopg.rows import class_row
 from psycopg_pool import AsyncConnectionPool
-from app.modules.user.User import User
+from app.modules.user.data_classes.User import User
 
 class UserRepository:
     def __init__(self, pool):
@@ -18,13 +18,7 @@ class UserRepository:
                 await cur.execute("SELECT * FROM users WHERE username ILIKE %s LIMIT 1", [username])
                 return await cur.fetchone()
             
-    async def create_session(self, user_id, session_token):
-        async with self.pool.connection() as conn:
-            async with conn.cursor() as cur:
-                await cur.execute(
-                    "INSERT INTO sessions (token, user_id, last_accessed_at) VALUES (%s, %s, CURRENT_TIMESTAMP)",
-                    [session_token, user_id]
-                )
+
                 
     async def get_by_id(self, user_id):
         async with self.pool.connection() as conn:
