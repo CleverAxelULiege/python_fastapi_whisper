@@ -1,10 +1,11 @@
 from typing import Annotated
 
-from fastapi import APIRouter, Form, Request, Depends, HTTPException
+from fastapi import APIRouter, Depends, Request
 from fastapi.responses import HTMLResponse, RedirectResponse
 
-from app.config import TEMPLATE_DIRECTORY
+from app.config import COOKIE_SESSION_KEY, TEMPLATE_DIRECTORY
 from app.modules.auth.AuthService import AuthService
+from app.modules.auth.depends.is_logged_in import is_logged_in
 
 router = APIRouter(
     prefix="",
@@ -25,14 +26,22 @@ def get_auth_controller(auth_service:AuthService):
         return await auth_service.get_all()
 
     @router.get("/login", response_class=HTMLResponse)
-    async def read_login_page(request: Request):
+    async def read_login_page(request: Request, is_logged_in=Depends(is_logged_in)):
+        
+        if(is_logged_in):
+            return RedirectResponse("/", status_code=302)
+        
         return TEMPLATE_DIRECTORY.TemplateResponse(
             request=request,
             name="home/login.html",
         )
 
     @router.post("/login", response_class=HTMLResponse) 
-    async def post_login_page(request: Request):
+    async def post_login_page(request: Request, is_logged_in=Depends(is_logged_in)):
+        
+        if(is_logged_in):
+            return RedirectResponse("/", status_code=302)
+        
         form = await request.form()
         username = form.get("username")
         password = form.get("password")
@@ -49,9 +58,9 @@ def get_auth_controller(auth_service:AuthService):
             
 
     @router.get("/logout")
-    async def logout():
-        response = RedirectResponse("/", status_code=302)
-        response.delete_cookie("access_token")
+    async def logout(request: Request):
+        session_token = request.cookies.get(COOKIE_SESSION_KEY)
+        response = await auth_service.delete_session(session_token)
         return response
 
     logout and post_login_page and read_login_page and read_test

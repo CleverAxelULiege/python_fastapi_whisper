@@ -1,5 +1,7 @@
 from fastapi import Response
 import uuid
+
+from fastapi.responses import RedirectResponse
 from app.config import COOKIE_SESSION_KEY, SESSION_LIFESPAN_SECONDS
 from app.modules.auth.AuthRepository import AuthRepository
 from app.modules.auth.data_classes.Session import Session
@@ -28,7 +30,7 @@ class AuthService:
         if(user.password != password):
             return response
         
-        # login successfull redirect to home page
+        # login successfull redirect to home page and create session
         session_token = uuid.uuid4().hex
         await self.auth_repository.create_session(user.id, session_token)
         
@@ -48,8 +50,16 @@ class AuthService:
         return None
     
     def __is_session_valid(self, session : Session ):
+        if(not session):
+            return False
         last_access_timestamp = int(session.last_accessed_at.timestamp())
         now_timestamp =  int(time())    
         elapsed = now_timestamp - last_access_timestamp
         
-        return session and elapsed < SESSION_LIFESPAN_SECONDS
+        return elapsed < SESSION_LIFESPAN_SECONDS
+    
+    async def delete_session(self, session_token):
+        await self.auth_repository.delete_session(session_token)
+        response = RedirectResponse("/", status_code=302)
+        response.delete_cookie(COOKIE_SESSION_KEY)
+        return response
