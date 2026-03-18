@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+
+{% block styles %}
+<link href="{{ url_for('public', path='/styles/home/login.css') }}" rel="stylesheet">
+{% endblock %}µ
+
+
+
+{% block content %}
+<div class="login_container">
+    <form action="{{ url_for('post_login_page') }}" method="POST">
+        <div class="input_group">
+            <label for="username">Nom d'utilisateur</label>
+            <input type="text" id="username" name="username" placeholder="Entrer votre nom d'utilisateur" required>
+        </div>
+        <div class="input_group">
+            <label for="password">Mot de passe</label>
+            <input type="password" id="password" name="password" placeholder="Entrer votre mot de passe" required>
+        </div>
+        <button type="submit">Se connecter</button>
+    </form>
+</div>
+{% endblock %}

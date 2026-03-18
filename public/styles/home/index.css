@@ -1,0 +1,36 @@
+.content {
+    max-width: 550px;
+    font-size: 18px;
+    margin: 25px auto 0 auto;
+}
+
+.content .description {
+    margin: 30px 0;
+}
+
+.content .description span {
+    font-style: italic;
+    font-family: var(--secondary-font);
+    color: var(--dark-blue);
+    font-weight: bold;
+    font-size: 24px;
+}
+
+
+.content a.login_button {
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    padding: 8px;
+    background: var(--blue);
+    border: none;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.content a.login_button:hover {
+    background: var(--dark-blue);
+}

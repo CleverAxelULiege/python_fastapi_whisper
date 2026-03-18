@@ -1,0 +1,32 @@
+from typing import Annotated
+
+from fastapi import APIRouter, Form, Request
+from fastapi.responses import HTMLResponse, RedirectResponse
+
+from app.config import TEMPLATE_DIRECTORY
+
+router = APIRouter(
+    prefix="",
+    tags=["home"],
+    responses={404: {"description": "Not found"}},
+)
+
+
+@router.get("/", response_class=HTMLResponse)
+async def read_home_page(request:Request):
+    print(request.state.user)
+    return TEMPLATE_DIRECTORY.TemplateResponse(
+        request=request, name="home/index.html", context={"message": "hello world"}
+    )
+    
+# @router.get("/login", response_class=HTMLResponse)
+# async def read_login_page(request:Request):
+#     return TEMPLATE_DIRECTORY.TemplateResponse(
+#         request=request, name="home/login.html", context={"message": "hello world"}
+#     )
+    
+# @router.post("/login")
+# async def post_login_page(request:Request):
+#     form = await request.form()
+    
+#     return [form.get("username")]

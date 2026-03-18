@@ -1,0 +1,162 @@
+:root {
+    --main-font: Arial, Helvetica, sans-serif;
+    --secondary-font: 'Courier New', Courier, monospace;
+    --light-gray: #e7ecef;
+    --gray: #8b8c89;
+    --black: #212529;
+    --dark-blue: #274c77;
+    --blue: #6096ba;
+    --light-blue: #a3cef1;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+*:not(dialog) {
+    margin: 0;
+}
+
+body {
+    font-family: var(--main-font);
+    -webkit-font-smoothing: antialiased;
+    background-color: var(--light-gray);
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+    display: block;
+    max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    overflow-wrap: break-word;
+}
+
+p {
+    text-wrap: pretty;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    text-wrap: balance;
+}
+
+
+
+
+header .logo_nav {
+    display: flex;
+    align-items: center;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px 10px;
+}
+
+header h1 {
+    user-select: none;
+    border-radius: 9999px;
+    padding: 5px 10px 5px 20px;
+    background-color: var(--black);
+    color: var(--light-gray);
+    font-family: var(--secondary-font);
+    font-size: 48px;
+    font-weight: 900;
+    letter-spacing: 5px;
+    text-decoration: none;
+}
+
+header .logo {
+    text-decoration: none;
+}
+
+header nav.desktop {
+    flex-grow: 1;
+}
+
+header nav.desktop ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
+header nav.desktop a {
+    position: relative;
+    display: block;
+    text-decoration: none;
+    font-size: 24px;
+    transition: all 100ms ease-in-out;
+    color: var(--black);
+}
+header nav.desktop a::after {
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: 100%;
+    height: 2px;
+    transform: scaleX(0);
+    transform-origin: center;
+    background-color: var(--blue);
+    transition: all 100ms ease-in-out;
+    border-radius: 9999px;
+}
+header nav.desktop a:hover::after {
+    transform: scaleX(1);
+}
+
+header nav.desktop a:hover {
+    color: var(--blue);
+}
+
+.blinking_cursor {
+    font-weight: 100;
+    animation: 1250ms blink step-end infinite;
+}
+
+@keyframes blink {
+    from,
+    to {
+        color: transparent;
+    }
+
+    50% {
+        color: var(--light-gray);
+    }
+}
+
+
+
+
+
+main > div {
+    padding: 10px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
