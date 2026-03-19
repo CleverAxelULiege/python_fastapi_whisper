@@ -27,7 +27,6 @@ def get_auth_controller(auth_service:AuthService):
 
     @router.get("/login", response_class=HTMLResponse)
     async def read_login_page(request: Request, is_logged_in=Depends(is_logged_in)):
-        
         if(is_logged_in):
             return RedirectResponse("/", status_code=302)
         
@@ -60,7 +59,10 @@ def get_auth_controller(auth_service:AuthService):
     @router.get("/logout")
     async def logout(request: Request):
         session_token = request.cookies.get(COOKIE_SESSION_KEY)
-        response = await auth_service.delete_session(session_token)
+        await auth_service.delete_session(session_token)
+        
+        response = RedirectResponse("/", status_code=302)
+        response.delete_cookie(COOKIE_SESSION_KEY)
         return response
 
     logout and post_login_page and read_login_page and read_test

@@ -6,13 +6,11 @@
 
 .title {
     width: 100%;
-    border-radius: 9999px;
     padding: 20px 0;
-    font-size: 48px;
+    font-size: 40px;
     font-weight: 900;
     text-align: center;
     color: var(--black);
-    line-height: 45px;
 
 }
 
@@ -21,4 +19,9 @@
 .description_container {
     max-width: 1000px;
     margin: 0 auto;
+}
+
+.description_container p {
+    margin: 20px 0;
+    font-size: 20px;
 }

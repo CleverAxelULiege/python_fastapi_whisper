@@ -6,6 +6,7 @@ from app.config import COOKIE_SESSION_KEY, SESSION_LIFESPAN_SECONDS
 from app.modules.auth.AuthRepository import AuthRepository
 from app.modules.auth.data_classes.Session import Session
 from app.modules.user.UserRepository import UserRepository
+from datetime import datetime, timedelta, timezone
 from time import time
 
 
@@ -34,16 +35,17 @@ class AuthService:
         session_token = uuid.uuid4().hex
         await self.auth_repository.create_session(user.id, session_token)
         
-        response.set_cookie(key=COOKIE_SESSION_KEY, value=session_token, secure=True, httponly=True, samesite="strict")
+        response.set_cookie(key=COOKIE_SESSION_KEY, value=session_token, secure=True, httponly=True, samesite="strict", expires=datetime.now(timezone.utc) + timedelta(seconds=SESSION_LIFESPAN_SECONDS))        
+        # response.set_cookie(key=COOKIE_SESSION_KEY, value=session_token, secure=True, httponly=True, samesite="strict")        
         response.headers["Location"] = "/"
         return response
     
-    async def get_user_id_from_session(self, session_token):
+    async def get_current_session(self, session_token):
         session = await self.auth_repository.get_session(session_token)
         
         if(self.__is_session_valid(session)):
             await self.auth_repository.refresh_session(session_token)
-            return session.user_id
+            return session
         elif(session_token): # if session not valid but still got a token, delete what may be in the sessions table
             await self.auth_repository.delete_session(session_token)
 
@@ -60,6 +62,3 @@ class AuthService:
     
     async def delete_session(self, session_token):
         await self.auth_repository.delete_session(session_token)
-        response = RedirectResponse("/", status_code=302)
-        response.delete_cookie(COOKIE_SESSION_KEY)
-        return response

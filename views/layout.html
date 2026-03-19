@@ -12,10 +12,17 @@
 <body>
     <header>
         <div>
-            <h1>MONK</h1>
+            <a class="logo" href="/">
+                <h1>MONK</h1>
+            </a>
             <nav class="desktop">
                 <ul>
-                    <li><a href="#">&#10097; Se connecter</a></li>
+                    {% if request.state.user %}
+                    <li><a href="/logout">&#10097; Se déconnecter <span><i>{{request.state.user.username}}</i></span></a></li>
+                    <li><a href="#">&#10097; Mes transcriptions</a></li>
+                    {% else %}
+                    <li><a href="/login">&#10097; Se connecter</a></li>
+                    {% endif %}
                 </ul>
             </nav>
         </div>
