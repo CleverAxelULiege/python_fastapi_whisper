@@ -1,5 +1,5 @@
 INSERT INTO users(username, "password")
 VALUES 
-('bill', 'password'),
+('john', 'password'),
 ('foo', 'password'),
 ('bar', 'password');

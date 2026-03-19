@@ -1,5 +1,4 @@
 from datetime import datetime, timedelta, timezone
-from typing import Annotated
 
 from fastapi import APIRouter, Depends, Request, Response
 from fastapi.responses import HTMLResponse, RedirectResponse
@@ -9,12 +8,6 @@ from app.modules.auth.AuthService import AuthService
 from app.modules.auth.consts.LoginResult import LoginResult
 from app.modules.auth.depends.is_logged_in import is_logged_in
 
-router = APIRouter(
-    prefix="",
-    tags=["auth"],
-    responses={404: {"description": "Not found"}},
-)
-
 def get_auth_controller(auth_service:AuthService):
 
     router = APIRouter(
@@ -23,10 +16,6 @@ def get_auth_controller(auth_service:AuthService):
         responses={404: {"description": "Not found"}},
     )
     
-    @router.get("/test")
-    async def read_test(request: Request):
-        return await auth_service.get_all()
-
     @router.get("/login", response_class=HTMLResponse)
     async def read_login_page(request: Request, is_logged_in=Depends(is_logged_in)):
         if(is_logged_in):
@@ -68,9 +57,6 @@ def get_auth_controller(auth_service:AuthService):
         return response
             
         
-        
-            
-
     @router.get("/logout")
     async def logout(request: Request):
         session_token = request.cookies.get(COOKIE_SESSION_KEY)
@@ -80,5 +66,5 @@ def get_auth_controller(auth_service:AuthService):
         response.delete_cookie(COOKIE_SESSION_KEY)
         return response
 
-    logout and post_login_page and read_login_page and read_test
+    logout and post_login_page and read_login_page
     return router

@@ -18,7 +18,13 @@
 
 .description_container {
     max-width: 1000px;
-    margin: 0 auto;
+    margin: 20px auto;
+}
+
+.description_container h3 {
+    color: var(--dark-blue);
+    font-size: 24px;
+    font-weight: 900;
 }
 
 .description_container p {
