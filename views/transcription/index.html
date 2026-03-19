@@ -1,15 +1,26 @@
 {% extends "layout.html" %}
 
 
+{% block styles %}
+<link href="{{ url_for('public', path='/styles/transcription/index.css') }}" rel="stylesheet">
+{% endblock %}µ
 
 
 
 
 {% block content %}
-<div class="title_container">
-    <h2 class="title">
-        transcription index
-    </h2>
+
+
+<div class="menu_container">
+    <a href="#" class="card">
+        <h3 class="card_title">Démarrer une transcription.</h3>
+        <p class="card_text">Démarrez une transcription d'un fichier audio.</p>
+        <p class="card_text">Choisissez parmi plusieurs paramètres pour réaliser votre transcription.</p>
+    </a>
+    <a href="#" class="card">
+        <h3 class="card_title">Journalisation des transcriptions.</h3>
+        <p class="card_text">Regardez combien de transcriptions vous avez réalisées avec différents détails.</p>
+    </a>
 </div>
 
 

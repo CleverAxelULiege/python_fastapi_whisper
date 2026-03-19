@@ -1,0 +1,32 @@
+.menu_container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    max-width: 750px;
+    margin: 50px auto 0 auto;
+}
+
+.card {
+    text-decoration: none;
+    font-family: var(--main-font);
+    background: var(--white);
+    border-radius: 12px;
+    padding: 16px;
+    width: 270px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border: 1px solid var(--gray);
+}
+
+.card_title {
+    font-size: 18px;
+    color: var(--dark-blue);
+    margin-bottom: 8px;
+}
+
+.card_text {
+    font-size: 14px;
+    color: var(--gray);
+    margin-bottom: 16px;
+    line-height: 1.4;
+}
