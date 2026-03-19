@@ -11,24 +11,22 @@
     sse
 </body>
 <script>
-    // URL of your FastAPI SSE endpoint
+    
     const url = "http://127.0.0.1:8000/stream";
 
-    // Create a new EventSource connection
     const eventSource = new EventSource(url);
 
-    // Listen for the "token" events
     eventSource.addEventListener("token", (event) => {
-        console.log("Received token:", event.data);
+        const msg = JSON.parse(event.data)
+        document.body.innerHTML += "<br>" + msg
+        //document.body.innerHTML += "<br>" + JSON.parse(event.data.msg);
     });
 
-    // Listen for the "done" event
     eventSource.addEventListener("done", (event) => {
         console.log("Stream finished:", event.data);
         eventSource.close(); // Close the connection when done
     });
 
-    // Optional: handle errors
     eventSource.onerror = (err) => {
         console.error("EventSource failed:", err);
     };
