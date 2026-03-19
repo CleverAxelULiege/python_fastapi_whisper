@@ -106,6 +106,7 @@ header h1::after {
 
 header nav.desktop {
     margin-left: auto;
+    position: relative;
 }
 
 header nav.desktop ul {
@@ -139,16 +140,19 @@ header nav.desktop a {
 
 }
 
-header nav.desktop a span {
+header nav.desktop span {
     padding: 0 10px;
     font-size: 14px;
     font-weight: 100;
     text-transform: none;
     color: var(--blue);
-    max-width: 100%;
+    max-width: 150px;
     overflow: hidden;
     text-overflow: "..";
     white-space: nowrap;
+    position: absolute;
+    top: 100%;
+    right: 0;
 }
 
 header nav.desktop a:hover {

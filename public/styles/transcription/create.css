@@ -1,0 +1,99 @@
+.form-card {
+    font-family: var(--main-font);
+    background: var(--white);
+    padding: 18px;
+    width: 280px;
+    border-radius: 12px;
+    border: 1px solid var(--light-gray);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+h3 {
+    margin-bottom: 12px;
+    color: var(--dark-blue);
+}
+
+.label {
+    font-size: 13px;
+    color: var(--gray);
+    display: block;
+    margin: 10px 0 4px;
+}
+
+input[type="file"],
+select {
+    width: 100%;
+    padding: 6px;
+    border-radius: 6px;
+    border: 1px solid var(--light-gray);
+    font-size: 13px;
+}
+
+audio {
+    width: 100%;
+    margin-top: 10px;
+}
+
+/* Button */
+.submit-btn {
+    margin-top: 14px;
+    width: 100%;
+    padding: 8px;
+    background: var(--blue);
+    color: var(--white);
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.submit-btn:hover {
+    background: var(--blue-marine);
+}
+
+/* Toggle */
+.toggle-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 12px;
+    font-size: 13px;
+}
+
+.switch {
+    position: relative;
+    width: 36px;
+    height: 18px;
+}
+
+.switch input {
+    display: none;
+}
+
+.slider {
+    position: absolute;
+    background: var(--gray);
+    border-radius: 20px;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.slider:before {
+    content: "";
+    position: absolute;
+    height: 14px;
+    width: 14px;
+    left: 2px;
+    top: 2px;
+    background: var(--white);
+    border-radius: 50%;
+    transition: 0.2s;
+}
+
+.switch input:checked + .slider {
+    background: var(--blue);
+}
+
+.switch input:checked + .slider:before {
+    transform: translateX(18px);
+}

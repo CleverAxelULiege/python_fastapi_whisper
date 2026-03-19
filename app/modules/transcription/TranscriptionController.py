@@ -20,6 +20,13 @@ def get_transcription_controller():
             name="transcription/index.html",
         )
         
-    read_transcription_index
+    @router.get("/create", response_class=HTMLResponse)
+    async def read_transcription_create(request: Request):
+        return TEMPLATE_DIRECTORY.TemplateResponse(
+            request=request,
+            name="transcription/create.html",
+        )
+        
+    read_transcription_index and read_transcription_create
 
     return router

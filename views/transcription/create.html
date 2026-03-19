@@ -1,0 +1,81 @@
+{% extends "layout.html" %}
+
+
+{% block styles %}
+<link href="{{ url_for('public', path='/styles/transcription/create.css') }}" rel="stylesheet">
+{% endblock %}µ
+
+
+
+
+{% block content %}
+
+
+<div class="form-card">
+    <h3>Audio Transcription</h3>
+
+    <!-- File input -->
+    <label class="label">Upload audio</label>
+    <input type="file" id="audioInput" accept="audio/*">
+
+    <!-- Audio preview -->
+    <audio id="audioPlayer" controls></audio>
+
+    <!-- Language select -->
+    <label class="label">Language</label>
+    <select>
+        <option value="en">Anglais</option>
+        <option value="zh">Chinois</option>
+        <option value="de">Allemand</option>
+        <option value="es">Espagnol</option>
+        <option value="ru">Russe</option>
+        <option value="ko">Coréen</option>
+        <option value="fr">Français</option>
+        <option value="ja">Japonais</option>
+        <option value="pt">Portugais</option>
+        <option value="tr">Turc</option>
+        <option value="pl">Polonais</option>
+        <option value="nl">Néerlandais</option>
+        <option value="sv">Suédois</option>
+        <option value="it">Italien</option>
+        <option value="id">Indonésien</option>
+        <option value="fi">Finnois</option>
+        <option value="uk">Ukrainien</option>
+        <option value="el">Grec</option>
+        <option value="cs">Tchèque</option>
+        <option value="ro">Roumain</option>
+        <option value="da">Danois</option>
+        <option value="hu">Hongrois</option>
+        <option value="no">Norvégien</option>
+    </select>
+
+    <!-- Beam size -->
+    <label class="label">Transcription quality</label>
+    <select>
+        <option value="1">Fast (beam size 1)</option>
+        <option value="3">Balanced (beam size 3)</option>
+        <option value="5">High quality (beam size 5)</option>
+        <option value="10">Very high (beam size 10)</option>
+    </select>
+    <p class="help-text">
+        Beam size controls how many possible sentences Whisper evaluates.
+        Higher = more accurate but slower.
+    </p>
+
+    <!-- VAD toggle -->
+    <div class="toggle-row">
+        <span>Use VAD filter</span>
+        <label class="switch">
+            <input type="checkbox">
+            <span class="slider"></span>
+        </label>
+    </div>
+    <p class="help-text">
+        VAD removes silence and background noise to improve transcription quality.
+    </p>
+
+    <button class="submit-btn">Transcribe</button>
+</div>
+
+
+{% endblock %}
