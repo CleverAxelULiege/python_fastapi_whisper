@@ -12,6 +12,13 @@ class AuthRepository:
                 await cur.execute("SELECT * FROM sessions WHERE token ILIKE %s LIMIT 1", [session_token])
                 return await cur.fetchone()
             
+    async def get_session_by_user_id(self, user_id):
+        async with self.pool.connection() as conn:
+            async with conn.cursor(row_factory=class_row(Session)) as cur:
+                await cur.execute("SELECT * FROM sessions WHERE user_id = %s LIMIT 1", [user_id])
+                return await cur.fetchone()
+        
+            
     async def create_session(self, user_id, session_token):
         async with self.pool.connection() as conn:
             async with conn.cursor() as cur:

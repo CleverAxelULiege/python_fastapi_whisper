@@ -1,10 +1,12 @@
+from datetime import datetime, timedelta, timezone
 from typing import Annotated
 
-from fastapi import APIRouter, Depends, Request
+from fastapi import APIRouter, Depends, Request, Response
 from fastapi.responses import HTMLResponse, RedirectResponse
 
-from app.config import COOKIE_SESSION_KEY, TEMPLATE_DIRECTORY
+from app.config import COOKIE_SESSION_KEY, SESSION_LIFESPAN_SECONDS, TEMPLATE_DIRECTORY
 from app.modules.auth.AuthService import AuthService
+from app.modules.auth.consts.LoginResult import LoginResult
 from app.modules.auth.depends.is_logged_in import is_logged_in
 
 router = APIRouter(
@@ -49,8 +51,21 @@ def get_auth_controller(auth_service:AuthService):
         if(not username or not password):
             return RedirectResponse("/login", status_code=302)
         
-        response_auth = await auth_service.login(username, password)
-        return response_auth
+        response = Response(status_code=302)
+        result, session_token = await auth_service.login(username, password)
+        if (result == LoginResult.SUCCESS):
+            response.set_cookie(
+                key=COOKIE_SESSION_KEY,
+                value=session_token,
+                secure=True,
+                httponly=True,
+                samesite="strict",
+                expires=datetime.now(timezone.utc) + timedelta(seconds=SESSION_LIFESPAN_SECONDS)
+            )
+            response.headers["Location"] = "/"
+        else:
+            response.headers["Location"] = "/login"
+        return response
             
         
         

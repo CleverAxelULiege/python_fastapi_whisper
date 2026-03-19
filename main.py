@@ -32,7 +32,6 @@ app.mount("/public", PUBLIC_FILE_DIRECTORY, name="public")
 app.include_router(home.router)
 app.include_router(get_auth_controller(auth_service))
 
-
 app.add_middleware(SessionMiddleware, user_repository=user_repo, auth_service=auth_service)
 
 

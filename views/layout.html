@@ -18,8 +18,8 @@
             <nav class="desktop">
                 <ul>
                     {% if request.state.user %}
-                    <li><a href="/logout">&#10097; Se déconnecter <span><i>{{request.state.user.username}}</i></span></a></li>
-                    <li><a href="#">&#10097; Mes transcriptions</a></li>
+                    <li><a href="/logout">&#10097; Se déconnecter <span>Connecté(e) : <i>{{request.state.user.username}}</i></span></a></li>
+                    <li><a href="#">&#10097; Transcriptions</a></li>
                     {% else %}
                     <li><a href="/login">&#10097; Se connecter</a></li>
                     {% endif %}
