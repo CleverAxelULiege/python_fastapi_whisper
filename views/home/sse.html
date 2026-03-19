@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    sse
+</body>
+<script>
+    // URL of your FastAPI SSE endpoint
+    const url = "http://127.0.0.1:8000/stream";
+
+    // Create a new EventSource connection
+    const eventSource = new EventSource(url);
+
+    // Listen for the "token" events
+    eventSource.addEventListener("token", (event) => {
+        console.log("Received token:", event.data);
+    });
+
+    // Listen for the "done" event
+    eventSource.addEventListener("done", (event) => {
+        console.log("Stream finished:", event.data);
+        eventSource.close(); // Close the connection when done
+    });
+
+    // Optional: handle errors
+    eventSource.onerror = (err) => {
+        console.error("EventSource failed:", err);
+    };
+</script>
+
+</html>
